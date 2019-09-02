@@ -8,7 +8,7 @@ function App() {
 			<iframe
 				src={`https://open.spotify.com/embed?uri=spotify:track:2kEDTny6qyWoyNUPYiLzTW`}
 				width="300"
-				height="80"
+				height="140"
 				frameBorder="0"
 				allowtransparency="true"
 				allow="encrypted-media"
