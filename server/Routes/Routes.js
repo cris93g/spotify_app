@@ -21,4 +21,6 @@ const {
 	deleteFromPlaylist
 } = require('../controllers/ApiController/ApiController');
 
-module.exports = (app) => {};
+module.exports = (app) => {
+	app.get(`/api/user`, getCurrentUser);
+};

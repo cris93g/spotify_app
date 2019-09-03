@@ -3,6 +3,7 @@ const express = require('express');
 const cors = require('cors');
 const massive = require('massive');
 const { json } = require('body-parser');
+const Routes = require('./Routes/Routes');
 
 const app = express();
 const port = process.env.port || 3001;
@@ -28,6 +29,7 @@ app.get('/login', function(req, res) {
 	);
 });
 
+Routes(app);
 app.listen(port, () => {
 	console.log(`app is listening on port ${port}`);
 });
