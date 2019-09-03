@@ -92,8 +92,169 @@ let getAnArtistAlbums = async (req, res) => {
 		res.status(200).json(results);
 	}
 };
-/* PLAYLIST*/
+/* FOLLOW*/
+let getFollowartistorUser = async (req, res) => {
+	let { artist_id } = req.body;
 
+	let info = await axios.get(`https://api.spotify.com/v1/artists/${artist_id}/albums`, {
+		headers: {
+			Authorization: `Bearer ${ID}`
+		}
+	});
+	let results = info.data;
+	if (results) {
+		res.status(200).json(results);
+	}
+};
+
+let followUser = async (req, res) => {
+	let { playlist_id } = req.body;
+	let info = await axios.put(`https://api.spotify.com/v1/playlists/${playlist_id}/followers`, {
+		headers: {
+			Authorization: `Bearer ${ID}`
+		}
+	});
+	let results = info.data;
+	if (results) {
+		res.status(200).json(results);
+	}
+};
+let unFollowUser = async (req, res) => {
+	// let { playlist_id } = req.body;
+	let info = await axios.delete(`https://api.spotify.com/v1/me/following`, {
+		headers: {
+			Authorization: `Bearer ${ID}`
+		}
+	});
+	let results = info.data;
+	if (results) {
+		res.status(200).json(results);
+	}
+};
+/*Player */
+let pausePlayer = async (req, res) => {
+	let info = await axios.put(`https://api.spotify.com/v1/me/player/pause`, {
+		headers: {
+			Authorization: `Bearer ${ID}`
+		}
+	});
+	let results = info.data;
+	if (results) {
+		res.status(200).json(results);
+	}
+};
+
+let skipToNextPlayer = async (req, res) => {
+	let info = await axios.post(`https://api.spotify.com/v1/me/player/next`, {
+		headers: {
+			Authorization: `Bearer ${ID}`
+		}
+	});
+	let results = info.data;
+	if (results) {
+		res.status(200).json(results);
+	}
+};
+
+let goToLastPlayedPlayer = async (req, res) => {
+	let info = await axios.post(`https://api.spotify.com/v1/me/player/previous`, {
+		headers: {
+			Authorization: `Bearer ${ID}`
+		}
+	});
+	let results = info.data;
+	if (results) {
+		res.status(200).json(results);
+	}
+};
+
+let repeatPlayer = async (req, res) => {
+	let info = await axios.put(`https://api.spotify.com/v1/me/player/repeat`, {
+		headers: {
+			Authorization: `Bearer ${ID}`
+		}
+	});
+	let results = info.data;
+	if (results) {
+		res.status(200).json(results);
+	}
+};
+
+let shufflePlayer = async (req, res) => {
+	let info = await axios.put(`https://api.spotify.com/v1/me/player/shuffle`, {
+		headers: {
+			Authorization: `Bearer ${ID}`
+		}
+	});
+	let results = info.data;
+	if (results) {
+		res.status(200).json(results);
+	}
+};
+
+let getRecentlyPlayed = async (req, res) => {
+	let info = await axios.get(`https://api.spotify.com/v1/me/player/recently-played`, {
+		headers: {
+			Authorization: `Bearer ${ID}`
+		}
+	});
+	let results = info.data;
+	if (results) {
+		res.status(200).json(results);
+	}
+};
+
+let getCurrentlyPlayed = async (req, res) => {
+	let info = await axios.get(`https://api.spotify.com/v1/me/player/currently-playing`, {
+		headers: {
+			Authorization: `Bearer ${ID}`
+		}
+	});
+	let results = info.data;
+	if (results) {
+		res.status(200).json(results);
+	}
+};
+
+/*Playlist */
+
+let addToPlaylist = async (req, res) => {
+	let { playlist_id } = req.body;
+	let info = await axios.post(`https://api.spotify.com/v1/playlists/${playlist_id}/tracks`, {
+		headers: {
+			Authorization: `Bearer ${ID}`
+		}
+	});
+	let results = info.data;
+	if (results) {
+		res.status(200).json(results);
+	}
+};
+
+let getUserPlaylist = async (req, res) => {
+	let info = await axios.get(`https://api.spotify.com/v1/me/playlists`, {
+		headers: {
+			Authorization: `Bearer ${ID}`
+		}
+	});
+	let results = info.data;
+	if (results) {
+		res.status(200).json(results);
+	}
+};
+
+let deleteFromPlaylist = async (req, res) => {
+	let { playlist_id } = req.body;
+	let info = await axios.delete(`https://api.spotify.com/v1/playlists/${playlist_id}/tracks`, {
+		headers: {
+			Authorization: `Bearer ${ID}`
+		}
+	});
+	let results = info.data;
+	if (results) {
+		res.status(200).json(results);
+	}
+};
 module.exports = {
 	getCurrentUser,
 	getUser,
@@ -101,5 +262,18 @@ module.exports = {
 	getAnArtist,
 	getAnArtistTopTracks,
 	getAnArtistAlbums,
-	getUserTopTracksorArtist
+	getUserTopTracksorArtist,
+	getFollowartistorUser,
+	followUser,
+	unFollowUser,
+	pausePlayer,
+	skipToNextPlayer,
+	getRecentlyPlayed,
+	getCurrentlyPlayed,
+	goToLastPlayedPlayer,
+	repeatPlayer,
+	shufflePlayer,
+	addToPlaylist,
+	getUserPlaylist,
+	deleteFromPlaylist
 };
